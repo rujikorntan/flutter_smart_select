@@ -7,7 +7,6 @@ class FeaturesModalWidget extends StatefulWidget {
 }
 
 class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
-
   int _question1;
   List<int> _question2;
 
@@ -40,17 +39,13 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
           onChange: (state) => setState(() => _question1 = state.value),
           choiceType: S2ChoiceType.radios,
           choiceItems: S2Choice.listFrom<int, String>(
-            source: _options1,
-            value: (i, v) => i,
-            title: (i, v) => v
-          ),
+              source: _options1, value: (i, v) => i, title: (i, v) => v),
           modalConfig: S2ModalConfig(
             type: S2ModalType.popupDialog,
             style: S2ModalStyle(
               elevation: 3,
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))
-              ),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
             ),
           ),
           tileBuilder: (context, state) {
@@ -69,11 +64,10 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
                   state,
                   hideValue: true,
                   leading: CircleAvatar(
-                    backgroundColor: _question1 == null ? Colors.grey : Colors.blue,
-                    child: const Text(
-                      '1',
-                      style: TextStyle(color: Colors.white)
-                    ),
+                    backgroundColor:
+                        _question1 == null ? Colors.grey : Colors.blue,
+                    child:
+                        const Text('1', style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ),
@@ -87,23 +81,20 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
           },
         ),
         SmartSelect<int>.multiple(
-          title: 'Which of following words would you use to describe smart_select?',
+          title:
+              'Which of following words would you use to describe smart_select?',
           value: _question2,
           onChange: (state) => setState(() => _question2 = state.value),
           choiceItems: S2Choice.listFrom<int, String>(
-            source: _options2,
-            value: (i, v) => i,
-            title: (i, v) => v
-          ),
+              source: _options2, value: (i, v) => i, title: (i, v) => v),
           choiceConfig: S2ChoiceConfig(
             type: S2ChoiceType.checkboxes,
             layout: S2ChoiceLayout.grid,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 3.5,
-              mainAxisSpacing: 0,
-              crossAxisSpacing: 0,
-              crossAxisCount: 2
-            ),
+                childAspectRatio: 3.5,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 0,
+                crossAxisCount: 2),
             style: S2ChoiceStyle(
               control: S2ChoiceControl.leading,
               wrapperPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -111,7 +102,8 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
           ),
           modalConfirm: true,
           modalType: S2ModalType.bottomSheet,
-          modalValidation: (value) => value.length > 0 ? null : 'Select at least one',
+          modalValidation: (value) =>
+              value.length > 0 ? null : 'Select at least one',
           modalHeaderBuilder: (context, state) {
             return Container(
               padding: const EdgeInsets.fromLTRB(25, 20, 25, 10),
@@ -123,13 +115,14 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
               padding: const EdgeInsets.fromLTRB(25, 5, 25, 15),
               child: ButtonTheme(
                 minWidth: double.infinity,
-                child: FlatButton(
+                child: TextButton(
                   child: Text('Submit (${state.changes.length})'),
-                  color: Colors.blue,
-                  textColor: Colors.white,
+                  style: TextButton.styleFrom(
+                      foregroundColor: Colors.blue,
+                      textStyle: TextStyle(color: Colors.white)),
                   onPressed: state.changes.valid
-                    ? () => state.closeModal(confirmed: true)
-                    : null,
+                      ? () => state.closeModal(confirmed: true)
+                      : null,
                 ),
               ),
             );
@@ -150,11 +143,10 @@ class _FeaturesModalWidgetState extends State<FeaturesModalWidget> {
                   state,
                   hideValue: true,
                   leading: CircleAvatar(
-                    backgroundColor: _question2 == null ? Colors.grey : Colors.blue,
-                    child: const Text(
-                      '2',
-                      style: TextStyle(color: Colors.white)
-                    ),
+                    backgroundColor:
+                        _question2 == null ? Colors.grey : Colors.blue,
+                    child:
+                        const Text('2', style: TextStyle(color: Colors.white)),
                   ),
                   body: S2TileChips(
                     chipLength: state.valueObject.length,

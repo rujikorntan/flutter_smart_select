@@ -8,7 +8,6 @@ class FeaturesModalConfirm extends StatefulWidget {
 }
 
 class _FeaturesModalConfirmState extends State<FeaturesModalConfirm> {
-
   List<String> _day = ['fri'];
   List<String> _fruit = ['mel'];
   String _hero = 'iro';
@@ -19,86 +18,85 @@ class _FeaturesModalConfirmState extends State<FeaturesModalConfirm> {
       children: <Widget>[
         const SizedBox(height: 7),
         SmartSelect<String>.multiple(
-          title: 'Days',
-          value: _day,
-          onChange: (state) => setState(() => _day = state.value),
-          choiceItems: choices.days,
-          modalType: S2ModalType.fullPage,
-          modalConfirm: true,
-          tileBuilder: (context, state) {
-            return S2Tile(
-              title: state.titleWidget,
-              value: state.valueDisplay,
-              onTap: state.showModal,
-              isTwoLine: true,
-              leading: const CircleAvatar(
-                backgroundImage: NetworkImage('https://source.unsplash.com/xsGxhtAsfSA/100x100'),
-              ),
-            );
-          }
-        ),
+            title: 'Days',
+            value: _day,
+            onChange: (state) => setState(() => _day = state.value),
+            choiceItems: choices.days,
+            modalType: S2ModalType.fullPage,
+            modalConfirm: true,
+            tileBuilder: (context, state) {
+              return S2Tile(
+                title: state.titleWidget,
+                value: state.valueDisplay,
+                onTap: state.showModal,
+                isTwoLine: true,
+                leading: const CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      'https://source.unsplash.com/xsGxhtAsfSA/100x100'),
+                ),
+              );
+            }),
         const Divider(indent: 20),
         SmartSelect<String>.multiple(
-          title: 'Fruit',
-          value: _fruit,
-          onChange: (state) => setState(() => _fruit = state.value),
-          choiceItems: choices.fruits,
-          modalType: S2ModalType.popupDialog,
-          modalConfirm: true,
-          modalValidation: (value) => value.length > 0 ? null : 'Select at least one',
-          tileBuilder: (context, state) {
-            return S2Tile.fromState(
-              state,
-              isTwoLine: true,
-              leading: Container(
-                width: 40,
-                alignment: Alignment.center,
-                child: const Icon(Icons.shopping_cart),
-              ),
-            );
-          },
-          modalActionsBuilder: (context, state) {
-            return [];
-          },
-          modalDividerBuilder: (context, state) {
-            return const Divider(height: 1);
-          },
-          modalFooterBuilder: (context, state) {
-            return Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 7.0,
-              ),
-              child: Row(
-                children: <Widget>[
-                  const Spacer(),
-                  FlatButton(
-                    child: const Text('Cancel'),
-                    onPressed: () => state.closeModal(confirmed: false),
-                  ),
-                  const SizedBox(width: 5),
-                  FlatButton(
-                    child: Text('OK (${state.changes.length})'),
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    onPressed: state.changes.valid
-                      ? () => state.closeModal(confirmed: true)
-                      : null,
-                  ),
-                ],
-              ),
-            );
-          }
-        ),
+            title: 'Fruit',
+            value: _fruit,
+            onChange: (state) => setState(() => _fruit = state.value),
+            choiceItems: choices.fruits,
+            modalType: S2ModalType.popupDialog,
+            modalConfirm: true,
+            modalValidation: (value) =>
+                value.length > 0 ? null : 'Select at least one',
+            tileBuilder: (context, state) {
+              return S2Tile.fromState(
+                state,
+                isTwoLine: true,
+                leading: Container(
+                  width: 40,
+                  alignment: Alignment.center,
+                  child: const Icon(Icons.shopping_cart),
+                ),
+              );
+            },
+            modalActionsBuilder: (context, state) {
+              return [];
+            },
+            modalDividerBuilder: (context, state) {
+              return const Divider(height: 1);
+            },
+            modalFooterBuilder: (context, state) {
+              return Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 7.0,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    const Spacer(),
+                    TextButton(
+                      child: const Text('Cancel'),
+                      onPressed: () => state.closeModal(confirmed: false),
+                    ),
+                    const SizedBox(width: 5),
+                    TextButton(
+                      child: Text('OK (${state.changes.length})'),
+                      style: TextButton.styleFrom(
+                          foregroundColor: Colors.blue,
+                          textStyle: TextStyle(color: Colors.white)),
+                      onPressed: state.changes.valid
+                          ? () => state.closeModal(confirmed: true)
+                          : null,
+                    ),
+                  ],
+                ),
+              );
+            }),
         const Divider(indent: 20),
         SmartSelect<String>.single(
           title: 'Super Hero',
           value: _hero,
           onChange: (state) => setState(() => _hero = state.value),
           choiceItems: choices.heroes,
-          choiceStyle: const S2ChoiceStyle(
-            activeColor: Colors.redAccent
-          ),
+          choiceStyle: const S2ChoiceStyle(activeColor: Colors.redAccent),
           modalType: S2ModalType.bottomSheet,
           modalValidation: (value) {
             if (value.length == 0) return 'Select at least one';
@@ -106,18 +104,18 @@ class _FeaturesModalConfirmState extends State<FeaturesModalConfirm> {
             return null;
           },
           modalConfig: S2ModalConfig(
-            useConfirm: true,
-            confirmLabel: const Text('Send'),
-            // confirmIcon: const Icon(Icons.send),
-            confirmColor: Colors.redAccent,
-            confirmBrightness: Brightness.dark
-          ),
+              useConfirm: true,
+              confirmLabel: const Text('Send'),
+              // confirmIcon: const Icon(Icons.send),
+              confirmColor: Colors.redAccent,
+              confirmBrightness: Brightness.dark),
           tileBuilder: (context, state) {
             return S2Tile.fromState(
               state,
               isTwoLine: true,
               leading: const CircleAvatar(
-                backgroundImage: NetworkImage('https://source.unsplash.com/8I-ht65iRww/100x100'),
+                backgroundImage: NetworkImage(
+                    'https://source.unsplash.com/8I-ht65iRww/100x100'),
               ),
             );
           },
